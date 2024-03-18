@@ -6,7 +6,7 @@
 
 ### Git
 - `$ git init`
-- Usar um `.gitignore` padrão para Node.js
+- Use a default`.gitignore`  for Node.js
 - `$ git remote set-url origin <url>`
 
 ### NPM
@@ -15,8 +15,8 @@
 ### Typescript
 - `$ yarn add -D typescript`
 - `$ yarn add -D @types/node`
-- Criar arquivo `tsconfig.json` (copiar o que está nesta repo)
-- Usar paths:
+- Create file: `tsconfig.json` (copy this file)
+- Use paths:
 ```
     "paths": {
       "@src/*": ["./src/*"],
@@ -33,10 +33,10 @@
 - `/test`
 
 ### Module-alias 
-Permite usar @src e @test...
+Allow use @src e @test...
 - `$ yarn install module-alias`
 - `$ yarn install -D @types/module-alias`
-- Criar pasta e arquivo `/src/util/module-alian.ts` (copiar o que está nesta repo)
+- Create folder and file `/src/util/module-alian.ts` (copy content of the file)
 
 ### package.json script
 ```
@@ -48,15 +48,29 @@ Permite usar @src e @test...
 ```
 ### ESLint
 - `$ yarn add -D eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser`
-- Criar arquivo `.eslintrc` (copiar o que está nesta repo)
-- Add ao package.json os scripts o lint e o lint:fix:
+- Create file`.eslintrc` (copy file content)
+- Add to package.json the following commands `lint` and `lint:fix`:
 ```
   "lint": "eslint ./src ./test --ext .ts",
   "lint:fix": "eslint ./src ./test --ext .ts --fix",
 ```
 
 ### TS Node Dev
-Cria uma repo do dev e compila a diff
-- `$ yarn add -D ts-node-dev`
+This dependency creates a kind of repo from dev and compile the diff:
+- Install: `$ yarn add -D ts-node-dev`
 - Add ao package.json o script:
   - `"start:dev": "ts-node-dev src/index.ts"`
+
+## JEST
+- `$ yarn add -D jest ts-jest @types/jest`
+- Create a global config file for unit tests:
+  - `jest.config.js` (copy file content)
+- Create a local tests config file for functional tests (e2e)
+  - Create `/test/jest.config.js`
+- Create test command
+  - `"test:functional": "jest --projects ./test --runInBand"`
+  (runInBand to follow in order instead in parallel to avoid problems changes DB statuses)
+
+### Install SuperTest
+- Make it not necessary to run a express server to run the tests
+- `$ yarn add -D supertest @types/supertest`
