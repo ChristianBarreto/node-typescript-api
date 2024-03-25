@@ -121,7 +121,7 @@ This config is simple because it uses the global configuration already settled.
 - Before create the service to access the external API, we need to create a unit test to test it: `/src/clients/__tests__/stormGlass.test.ts`.
 - This first unit test is created supposing that this service to access the external API is a class with methods to allow access.
 
-**Note:** Create classes to access external services can be a best practice.
+**GOOD PRACTICE:** Create classes to access external services can be a best practice.
 
 - Create directory and file to handle the client API: `/src/clients/stormGlass.ts`
 - Axios library has available a contructor, by the way here we create our own class `StormGlass` using an Axios constructor `AxiosStatic`.
@@ -137,3 +137,13 @@ This config is simple because it uses the global configuration already settled.
 
 ### 2.5 Jest Mock with typescript
 - We need to create a new variable which is 'axios' declaring its types as `jest.Mocked<typeof axios>`. It binds these two types and make all the types available.
+
+### 2.6 Handing errors on StormGlass service
+- Following the TDD first we create unit test expecting errors when things go wrong.
+- Create `try/catch` to handle errors on request (class StormGlass)
+- Create two class of errors: error before the request arrives on service, and a error after the request arrives on the service.
+**GOOD PRACTICE**: Create a generic logic to make the errors clear when implementing loggin and monitoring
+- Create a util class InternalError with code 500 that extends from Error
+- Create a Request error class that extends from InternalError and adds the text
+- Create a Response error class that extends from InternalError and adds the text
+**Note:** This response error class extends from InternalError (returning 500 code) because it is a internal error of user point of view, so we log as external 400 internally and show to user an internal 500.
